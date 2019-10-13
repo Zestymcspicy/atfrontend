@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import Header from './Header.js';
+import EmailForm from './EmailForm.js';
+import Profile from './Profile.js';
+// import UserProvider from './UserContext.js';
 import './App.css';
 
 function App() {
+
+  const [user, setUser] = useState({})
+  const [location, setLocation] = useState('start');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      {(function(){
+        switch(location){
+          case 'start':
+            return <EmailForm
+              setUser={setUser}
+              setLocation={setLocation}/>;
+            case 'profile':
+              return <Profile
+                user={user}
+                setUser={setUser}
+                setLocation={setLocation}/>
+          default:
+            return <p>whoops</p>;
+        }
+      })()}
     </div>
   );
 }
