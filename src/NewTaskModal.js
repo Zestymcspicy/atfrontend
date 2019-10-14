@@ -5,33 +5,28 @@ export default function NewTaskModal(props) {
   const [taskName, setTaskName] = useState("");
   const [newTask, setNewTask] = useState({});
 
-  const handleNameChange = e => {
-    setTaskName(e.target.value)
-    setNewTask({
-      name: taskName
-    })
-  }
+
 
   const addTask = () => {
     let repUser = props.user;
-    repUser.tasks.push(newTask);
+    repUser.tasks.push({name: taskName});
     props.setUser(repUser);
-    setNewTask("");
+    // setNewTask("");
     props.toggleModal();
   }
 
-  const click = async() => {
-
-    addTask()
-  }
+  // const click = () => {
+  //   setNewTask({name: taskName})
+  //   addTask()
+  // }
 
   return(
     <div>
       <input
       value={taskName}
-      onChange={e => handleNameChange(e)}
+      onChange={e => setTaskName(e.target.value)}
       type="text"></input>
-      <button onClick={click}>OK</button>
+      <button onClick={addTask}>OK</button>
     </div>
   )
 }

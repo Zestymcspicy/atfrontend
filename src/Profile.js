@@ -21,7 +21,7 @@ export default function Profile(props){
     <button onClick={toggleModal}>AddTask</button>
     <ol>
     {props.user.tasks.map((task, index) => {
-      return (<li key={index}>
+      return (<li style={{listStyleType:"none"}}key={index}>
         <TaskCard task={task}/>
         </li>)
     } )}
