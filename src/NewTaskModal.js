@@ -9,7 +9,6 @@ export default function NewTaskModal(props) {
 
 
   const sendTask = () => {
-    props.toggleModal();
     // console.log(longTermGoal);
     // let goalTerm = longTermGoal?true:false;
     return fetch('http://localhost:5000/tasks/add', {
@@ -28,7 +27,8 @@ export default function NewTaskModal(props) {
       let repUser = props.user;
       repUser.tasks.push(data);
       console.log(data);
-      return props.setUser(repUser);
+      props.setUser(repUser);
+      props.toggleModal();      
     });
   }
 
