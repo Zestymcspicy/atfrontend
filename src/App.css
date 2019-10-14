@@ -114,6 +114,13 @@ input:checked + .slider:before {
   margin: 0 auto;
 }
 
+.CloseButton{
+  position: absolute;
+  top:-5px;
+  right: 15px;
+  font-size: 40px;
+}
+
 .taskNameInput{
   width: 85%;
   height: 40px;
@@ -170,13 +177,57 @@ input:checked + .slider:before {
 }
 
 .TaskCard{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   text-align: left;
   border: black solid 1px;
   box-shadow: 2px 2px #b6b0b0;
   padding-left: 5px;
 }
 
+.CardTop > p {
+  width: 85%;
+}
 ol{
   margin: 4px 4px 4px 4px;
   padding-left: 0;
+}
+
+.CardTop{
+  display: flex;
+  width: 100%;
+  flex-flow: row;
+}
+
+.ArrowBox{
+  justify-content: center;
+  margin: 10px 0 0 0;
+  padding-right: 10px;
+  height: 30px;
+  width: 40px;
+}
+
+.Arrow{
+  margin-left: 50%;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  border: solid grey;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.Down{
+  border-left: none !important;
+  border-top:  none !important;
+}
+
+.Up{
+  border-bottom: none !important;
+  border-right: none !important;
+}
+
+.CardBottom {
+  width: 100%;
 }

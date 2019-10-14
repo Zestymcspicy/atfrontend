@@ -7,17 +7,17 @@ import './App.css';
 
 function App() {
 
-  const [user, setUser] = useState({});
-  // const [user, setUser] = useState({
-  //   date: "2019-10-13T04:02:09.438Z",
-  //   email: "HopsTheDog@dogmail.com",
-  //   isAdmin: false,
-  //   name: "hop",
-  //   tasks: [{name: "cat", longTermGoal:false},
-  //       {name: "face", longTermGoal:true}],
-  //   __v: 0,
-  //   _id: "5da2a1c12b83b52660df59c5"})
-  const [location, setLocation] = useState('start');
+  // const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    date: "2019-10-13T04:02:09.438Z",
+    email: "HopsTheDog@dogmail.com",
+    isAdmin: false,
+    name: "hop",
+    tasks: [{name: "cat", longTermGoal:false},
+        {name: "face", longTermGoal:true}],
+    __v: 0,
+    _id: "5da2a1c12b83b52660df59c5"})
+  const [location, setLocation] = useState('profile');
 
   return (
     <div className="App">

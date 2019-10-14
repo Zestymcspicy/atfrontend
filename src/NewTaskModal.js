@@ -9,7 +9,7 @@ export default function NewTaskModal(props) {
 
 
   const sendTask = () => {
-    props.toggleModal();    
+    props.toggleModal();
     console.log(longTermGoal);
     // let goalTerm = longTermGoal?true:false;
     fetch('http://localhost:5000/tasks/add', {
@@ -35,6 +35,9 @@ export default function NewTaskModal(props) {
 
   return(
     <div className="NewTaskModal">
+    <span
+    className="CloseButton"
+    onClick={props.toggleModal}>&#215;</span>
       <div>
         <span>Goal Name</span>
         <input
