@@ -2,6 +2,22 @@
   text-align: center;
 }
 
+button{
+  min-height: 36px;
+  min-width: max-content;
+  width: 80px;
+  border-radius: 10% 10% 10% 10%;
+  background-color: #113450;
+  border: 1px solid #113450;
+  color: #FFFFFF;
+  margin: 0 auto;
+}
+
+button:hover{
+  background-color: #FFFFFF;
+  color: #113450;
+  cursor: pointer;
+}
 .switch {
   position: relative;
   display: inline-block;
@@ -78,4 +94,89 @@ input:checked + .slider:before {
   color: red;
   font-size: 12px;
   width: 100%;
+}
+
+.NewTaskModal{
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* max-width: 40vw; */
+  min-width: 290px;
+  height: 50vh;
+  border: 1px solid black;
+  box-shadow: 2px 2px grey;
+  margin: 0 auto;
+}
+
+.taskNameInput{
+  width: 85%;
+  height: 40px;
+}
+
+.LongTermSwitchBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LongTermSwitchBox > span{
+  margin: 1vh 0 1vh 0;
+}
+
+.GoalBox {
+  width: 80%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.ListBox{
+  border: black 1px solid;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.TaskTab {
+  width: 48%;
+  height: 34px;
+  padding-top: 6px;
+  border: black 1px solid;
+  margin: 10px 2px 0 2px;
+  border-bottom: none;
+}
+
+.TaskTab:hover{
+  cursor: pointer;
+}
+
+.activeTab > div {
+  position: relative;
+  background-color: white;
+  z-index: 0;
+  height: 2vh;
+  width: 100%;
+}
+
+.inactiveTab{
+  background-color: #b6b0b0;
+}
+
+.TaskCard{
+  text-align: left;
+  border: black solid 1px;
+  box-shadow: 2px 2px #b6b0b0;
+  padding-left: 5px;
+}
+
+ol{
+  margin: 4px 4px 4px 4px;
+  padding-left: 0;
 }
