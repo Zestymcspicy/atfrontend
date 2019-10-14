@@ -5,7 +5,7 @@ export default function NewUserQuestions(props) {
   const [longTerm, setlongTerm] = useState(["Driver's License or State Issued ID", "Social Security Card", "Birth Certificate"]);
   const addNewUserTotalTasks = e => {
     e.preventDefault()
-    fetch("http://localhost:5000/tasks/addmultiple", {
+    fetch("https://activity-tracker-hearthstone.herokuapp.com/tasks/addmultiple", {
       method: "POST",
       body: JSON.stringify({
         user_id: props.user._id,

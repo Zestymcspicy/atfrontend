@@ -122,8 +122,9 @@ input:checked + .slider:before {
 }
 
 input {
-  min-height: 30px;
-  min-width: 30px;
+  min-height: 20px;
+  min-width: 20px;
+  margin: 10px;
 }
 
 .taskNameInput{

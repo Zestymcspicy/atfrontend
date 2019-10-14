@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export default function TaskCard(props){
 
   //change state back to false
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const [completed, setCompleted] = useState(false);
 
   const toggleCompleted = () => setCompleted(!completed);

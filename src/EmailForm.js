@@ -43,7 +43,7 @@ export default function EmailForm(props) {
   }
 
   function sendUser(incomingUser, type){
-    fetch(`http://localhost:5000/users/${type}`, {
+    fetch(`https://activity-tracker-hearthstone.herokuapp.com/users/${type}`, {
       method: 'POST',
       body: JSON.stringify(incomingUser),
       headers: {

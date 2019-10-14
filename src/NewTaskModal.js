@@ -11,7 +11,7 @@ export default function NewTaskModal(props) {
   const sendTask = () => {
     // console.log(longTermGoal);
     // let goalTerm = longTermGoal?true:false;
-    return fetch('http://localhost:5000/tasks/add', {
+    return fetch('https://activity-tracker-hearthstone.herokuapp.com/tasks/add', {
       method: 'POST',
       body: JSON.stringify({
         name: taskName,
@@ -28,7 +28,7 @@ export default function NewTaskModal(props) {
       repUser.tasks.push(data);
       console.log(data);
       props.setUser(repUser);
-      props.toggleModal();      
+      props.toggleModal();
     });
   }
 
