@@ -3,44 +3,35 @@ import React, { useState, useEffect } from 'react';
 export default function NewTaskModal(props) {
 
   const [taskName, setTaskName] = useState("");
-  const [isLongTerm, setIsLongTerm] = useState(false);
+  const [longTermGoal, setLongTermGoal] = useState(false);
 
-  const toggleIsLongTerm = () => setIsLongTerm(!isLongTerm);
+  const toggleIsLongTerm = () => setLongTermGoal(!longTermGoal);
 
-  const sendTask = task => {
+
+  const sendTask = () => {
+    props.toggleModal();    
+    console.log(longTermGoal);
+    // let goalTerm = longTermGoal?true:false;
     fetch('http://localhost:5000/tasks/add', {
       method: 'POST',
-      body: JSON.stringify(task),
+      body: JSON.stringify({
+        name: taskName,
+        longTermGoal: longTermGoal,
+        user_id: props.user._id,
+        completed: false
+      }),
       headers: {
         "Content-Type": "application/json"
       }
     }).then(res => res.json())
     .then(data => {
-      console.log(data);
-      return addTaskToCurrentUser(data)
+      let repUser = props.user;
+      repUser.tasks.push(data);
+      return props.setUser(repUser);
     });
   }
 
-  const addTaskToCurrentUser = task => {
-    let repUser = props.user;
-    repUser.tasks.push(task);
-    props.toggleModal();    
-    return props.setUser(repUser);
-  }
 
-  // useEffect(() => {
-  //   props.setUser(props.user);
-  // }, [props, props.user, props.setUser])
-
-  const addTask = () => {
-    let newTask = {
-      name: taskName,
-      longTermGoal: isLongTerm,
-      user_id: props.user._id,
-      completed: false
-    };
-    sendTask(newTask);
-  }
 
   return(
     <div className="NewTaskModal">
@@ -57,14 +48,13 @@ export default function NewTaskModal(props) {
         <label className="switch">
           <input
             onChange={toggleIsLongTerm}
-            value={isLongTerm}
             type="checkbox"
             />
           <span className="slider"></span>
         </label>
-        {isLongTerm?<span>Long term</span>:<span>Weekly</span>}
+        {longTermGoal?<span>Long term</span>:<span>Weekly</span>}
       </div>
-      <button onClick={addTask}>OK</button>
+      <button onClick={sendTask}>OK</button>
     </div>
   )
 }
