@@ -55,7 +55,10 @@ export default function EmailForm(props) {
     }).then(data => {
       console.log(data)
       props.setUser(data.user);
-      props.setLocation('profile');
+      type==="login"?
+      props.setLocation('profile')
+      :
+      props.setLocation('NewUserQuestions');
     })
     .catch(err => console.log(err))
   }
