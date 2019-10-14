@@ -13,6 +13,7 @@ export default function TaskCard(props){
     e.preventDefault();
     let repTask = props.task
     repTask.completed=completed;
+    props.updateTaskAndUser(repTask)
     console.log(repTask)
     console.log(props.task)
   }

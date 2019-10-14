@@ -14,6 +14,25 @@ export default function Profile(props){
 
   const weeklyActive = weekly?"activeTab":"inactiveTab";
   const longTermActive = weekly?"inactiveTab":"activeTab";
+
+  const updateTaskAndUser = task => {
+    let newTaskList = props.user.tasks.filter(x => x._id !== task._id);
+    newTaskList.push(task)
+    let user = props.user;
+    user.tasks = newTaskList;
+    fetch('http://localhost:5000/users/update', {
+      method: 'PUT',
+      body: JSON.stringify({task, user}),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    // props.setUser(repUser)
+    .then(res => {
+      console.log(res);
+      return res.json();
+    }).then(data => props.setUser(data))
+  }
   return(
     <div>
     <h2>Hello {props.user.name}</h2>
@@ -35,9 +54,9 @@ export default function Profile(props){
     </div>
     <div className="ListBox">
     <ol>
-    {props.user.tasks.filter(x => x.longTermGoal===!weekly).map((task, index) => {
-      return (<li style={{listStyleType:"none"}}key={index}>
-        <TaskCard task={task}/>
+    {props.user.tasks.filter(x => x.longTermGoal===!weekly && !x.completed).map((task, index) => {
+      return (<li style={{listStyleType:"none"}} key={index}>
+        <TaskCard updateTaskAndUser={updateTaskAndUser} task={task}/>
         </li>)
     } )}
     </ol>

@@ -10,9 +10,9 @@ export default function NewTaskModal(props) {
 
   const sendTask = () => {
     props.toggleModal();
-    console.log(longTermGoal);
+    // console.log(longTermGoal);
     // let goalTerm = longTermGoal?true:false;
-    fetch('http://localhost:5000/tasks/add', {
+    return fetch('http://localhost:5000/tasks/add', {
       method: 'POST',
       body: JSON.stringify({
         name: taskName,
@@ -27,6 +27,7 @@ export default function NewTaskModal(props) {
     .then(data => {
       let repUser = props.user;
       repUser.tasks.push(data);
+      console.log(data);
       return props.setUser(repUser);
     });
   }
