@@ -20,7 +20,8 @@ export default function Profile(props){
     newTaskList.push(task)
     let user = props.user;
     user.tasks = newTaskList;
-    fetch('https://activity-tracker-hearthstone.herokuapp.com/users/update', {
+    // fetch('https://activity-tracker-hearthstone.herokuapp.com/users/update', {
+    return fetch('http://localhost:5000/users/update', {
       method: 'PUT',
       body: JSON.stringify({task, user}),
       headers: {
@@ -42,7 +43,10 @@ export default function Profile(props){
       user={props.user}
       toggleModal={toggleModal}/>
     }
-    <button onClick={toggleModal}>AddTask</button>
+    <button
+      className="StandardButton"
+      onClick={toggleModal}>
+      AddTask</button>
     <div className="GoalBox">
     <div onClick={setToWeekly} className={`${weeklyActive} TaskTab`}>
     Weekly

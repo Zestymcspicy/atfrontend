@@ -11,7 +11,8 @@ export default function NewTaskModal(props) {
   const sendTask = () => {
     // console.log(longTermGoal);
     // let goalTerm = longTermGoal?true:false;
-    return fetch('https://activity-tracker-hearthstone.herokuapp.com/tasks/add', {
+    // return fetch('https://activity-tracker-hearthstone.herokuapp.com/tasks/add', {
+    return fetch('http://localhost:5000/tasks/add', {
       method: 'POST',
       body: JSON.stringify({
         name: taskName,
@@ -58,7 +59,9 @@ export default function NewTaskModal(props) {
         </label>
         {longTermGoal?<span>Long term</span>:<span>Weekly</span>}
       </div>
-      <button onClick={sendTask}>OK</button>
+      <button
+        className="StandardButton"
+        onClick={sendTask}>OK</button>
     </div>
   )
 }

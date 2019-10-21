@@ -43,7 +43,8 @@ export default function EmailForm(props) {
   }
 
   function sendUser(incomingUser, type){
-    fetch(`https://activity-tracker-hearthstone.herokuapp.com/users/${type}`, {
+    // fetch(`https://activity-tracker-hearthstone.herokuapp.com/users/${type}`, {
+    fetch(`http://localhost:5000/users/${type}`, {
       method: 'POST',
       body: JSON.stringify(incomingUser),
       headers: {
@@ -55,6 +56,10 @@ export default function EmailForm(props) {
     }).then(data => {
       console.log(data)
       props.setUser(data.user);
+      if(data.user.isAdmin){
+        props.setData(data.allUsers);
+        return props.setLocation('adminDash');
+      }
       type==="login"?
       props.setLocation('profile')
       :
@@ -126,7 +131,9 @@ export default function EmailForm(props) {
           </label>
         }
         <br/>
-        <button type="submit">OK</button>
+        <button
+          className="StandardButton"
+          type="submit">OK</button>
       </form>
 
     </div>

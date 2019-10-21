@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Dropdown from './Dropdown';
 
 const Header = () => {
 
-
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
 
   const styles = {
     header:{
@@ -15,11 +17,35 @@ const Header = () => {
     title: {
       margin: "0 auto 0 auto",
       padding: "10px 0 20px 0"
+    },
+    dropdownButton: {
+      backgroundColor: "#113450",
+      border: "1px solid #113450",
+      color: "#FFFFFF",
+      position: "absolute",
+      left: "10px",
+      top: "10px"
+    },
+    buttonDiv: {
+      width: "24px",
+      border: "solid 1px white",
+      height: "1px",
+      backgroundColor: "white",
+      margin: "5px 0"
     }
   }
 
   return(
     <div style={styles.header}>
+      <button
+        style={styles.dropdownButton}
+        onClick={toggleDropDown}>
+        <div style={styles.buttonDiv}></div>
+        <div style={styles.buttonDiv}></div>
+        <div style={styles.buttonDiv}></div>
+        {dropdownOpen && <Dropdown />}      
+      </button>
+
       <h1 style={styles.title}>Activity Tracker</h1>
     </div>
   )
