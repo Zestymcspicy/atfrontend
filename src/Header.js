@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import Dropdown from './Dropdown';
 
-const Header = () => {
+const Header = props => {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
+  const toggleDropDown = e => {
+    e.preventDefault();
+    setDropdownOpen(!dropdownOpen);
+  }
 
   const styles = {
     header:{
@@ -43,9 +46,12 @@ const Header = () => {
         <div style={styles.buttonDiv}></div>
         <div style={styles.buttonDiv}></div>
         <div style={styles.buttonDiv}></div>
-        {dropdownOpen && <Dropdown />}      
+        {dropdownOpen && <Dropdown
+          user={props.user}
+          setUser={props.setUser}
+          setLocation={props.setLocation}
+          setData={props.setData}/>}
       </button>
-
       <h1 style={styles.title}>Activity Tracker</h1>
     </div>
   )

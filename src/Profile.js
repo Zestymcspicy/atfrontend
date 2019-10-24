@@ -20,7 +20,7 @@ export default function Profile(props){
     newTaskList.push(task)
     let user = props.user;
     user.tasks = newTaskList;
-    // fetch('https://activity-tracker-hearthstone.herokuapp.com/users/update', {
+    // return fetch('https://activity-tracker-hearthstone.herokuapp.com/users/update', {
     return fetch('http://localhost:5000/users/update', {
       method: 'PUT',
       body: JSON.stringify({task, user}),

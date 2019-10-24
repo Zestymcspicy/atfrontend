@@ -22,11 +22,15 @@ function App() {
   //   _id: "5da2a1c12b83b52660df59c5"})
   const [location, setLocation] = useState('start');
   // const [location, setLocation] = useState('NewUserQuestions');
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
 
   return (
     <div className="App">
-      <Header />
+      <Header
+        user={user}
+        setUser={setUser}
+        setData={setData}
+        setLocation={setLocation}/>
       {(function(){
         switch(location){
           case 'start':
@@ -49,6 +53,8 @@ function App() {
                 data={data}
                 user={user}
                 />
+            case 'archive':
+              return <h2>ARCHIVE</h2>
           default:
             return <p>whoops</p>;
         }

@@ -237,3 +237,12 @@ ol{
 .CardBottom {
   width: 100%;
 }
+
+.AdminUserListEntry {
+  margin: 4px auto;
+  max-width: 400px;
+  text-align: left;
+  border: 1px black solid;
+  padding: 12px;
+  box-shadow: 2px 2px #b6b0b0;
+}
