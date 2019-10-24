@@ -15,7 +15,7 @@ export default function AdminDash(props) {
         return(
         <ol>{props.data.map((x,index) => {
         return(<li
-          onClick={OpenDetailScreen(x)}
+          onClick={()=>OpenDetailScreen(x)}
           key={index}>
           <div className="AdminUserListEntry">
             {x.name}
