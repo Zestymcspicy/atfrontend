@@ -4,11 +4,20 @@ export default function NewTaskModal(props) {
 
   const [taskName, setTaskName] = useState("");
   const [longTermGoal, setLongTermGoal] = useState(false);
+  const [dueDate, setDueDate] = useState();
 
   const toggleIsLongTerm = () => setLongTermGoal(!longTermGoal);
-
+  const dueDateChange = e => {
+    console.log(e.target.value)
+    setDueDate(e.target.value)
+  };
 
   const sendTask = () => {
+    if(!longTermGoal){
+      var d = new Date();
+      d.setDate(d.getDate() + (1 + 7 - d.getDay()) % 7);
+      setDueDate(d);
+    }
     // console.log(longTermGoal);
     // let goalTerm = longTermGoal?true:false;
     // return fetch('https://activity-tracker-hearthstone.herokuapp.com/tasks/add', {
@@ -18,6 +27,7 @@ export default function NewTaskModal(props) {
         name: taskName,
         longTermGoal: longTermGoal,
         user_id: props.user._id,
+        dueDate: dueDate,
         completed: false
       }),
       headers: {
@@ -59,6 +69,15 @@ export default function NewTaskModal(props) {
         </label>
         {longTermGoal?<span>Long term</span>:<span>Weekly</span>}
       </div>
+      {longTermGoal &&
+        <>
+        <span>Due Date</span>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={dueDateChange}/>
+        </>
+      }
       <button
         className="StandardButton"
         onClick={sendTask}>OK</button>

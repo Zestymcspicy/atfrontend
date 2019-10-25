@@ -246,3 +246,7 @@ ol{
   padding: 12px;
   box-shadow: 2px 2px #b6b0b0;
 }
+
+.AdminUserListEntry:hover {
+  cursor: pointer;
+}
