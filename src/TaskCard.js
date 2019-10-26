@@ -25,7 +25,7 @@ export default function TaskCard(props){
     <div className="TaskCard">
     <div className="CardTop">
       <p>{props.task.name}</p>
-      <p>{props.task.dueDate}</p>
+      <p>{props.task.dueDate && new Date(props.task.dueDate).toDateString()}</p>
       <div
       onClick={toggleExpanded}
       className="ArrowBox">

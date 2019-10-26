@@ -5,19 +5,29 @@ export default function NewTaskModal(props) {
   const [taskName, setTaskName] = useState("");
   const [longTermGoal, setLongTermGoal] = useState(false);
   const [dueDate, setDueDate] = useState();
+  const today = new Date(Date.now()).toDateString();
 
-  const toggleIsLongTerm = () => setLongTermGoal(!longTermGoal);
+  useEffect(() => {
+    var d = new Date();
+    d.setDate(d.getDate() + (1 + 7 - d.getDay()) % 7);
+    d=d.toDateString()
+    console.log(d)
+    setDueDate(d);
+  }, [setDueDate])
+
+  const toggleIsLongTerm = () => {
+    setLongTermGoal(!longTermGoal)
+    if(!longTermGoal){
+    }
+  };
+
   const dueDateChange = e => {
     console.log(e.target.value)
     setDueDate(e.target.value)
   };
 
   const sendTask = () => {
-    if(!longTermGoal){
-      var d = new Date();
-      d.setDate(d.getDate() + (1 + 7 - d.getDay()) % 7);
-      setDueDate(d);
-    }
+
     // console.log(longTermGoal);
     // let goalTerm = longTermGoal?true:false;
     // return fetch('https://activity-tracker-hearthstone.herokuapp.com/tasks/add', {
@@ -42,6 +52,7 @@ export default function NewTaskModal(props) {
       props.toggleModal();
     });
   }
+
 
 
 
@@ -73,9 +84,10 @@ export default function NewTaskModal(props) {
         <>
         <span>Due Date</span>
         <input
+          min={today}
           type="date"
           value={dueDate}
-          onChange={dueDateChange}/>
+          onChange={e=>dueDateChange(e)}/>
         </>
       }
       <button
