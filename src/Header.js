@@ -40,18 +40,21 @@ const Header = props => {
 
   return(
     <div style={styles.header}>
+      {props.user &&
       <button
         style={styles.dropdownButton}
         onClick={toggleDropDown}>
         <div style={styles.buttonDiv}></div>
         <div style={styles.buttonDiv}></div>
         <div style={styles.buttonDiv}></div>
+      </button>
+      }
         {dropdownOpen && <Dropdown
           user={props.user}
+          toggleDropDown={toggleDropDown}
           setUser={props.setUser}
           setLocation={props.setLocation}
           setData={props.setData}/>}
-      </button>
       <h1 style={styles.title}>Activity Tracker</h1>
     </div>
   )

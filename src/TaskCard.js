@@ -10,6 +10,8 @@ export default function TaskCard(props){
   const toggleExpanded = () => setExpanded(!expanded);
 
   const updateTask = e => {
+    toggleExpanded();
+    setCompleted(false);
     e.preventDefault();
     let repTask = props.task
     repTask.completed=completed;

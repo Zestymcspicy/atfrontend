@@ -250,3 +250,12 @@ ol{
 .AdminUserListEntry:hover {
   cursor: pointer;
 }
+
+.Dropdown {
+  position: absolute;
+  top: 52px;
+  background-color: inherit;
+  padding: 10px;
+  color: white;
+  display: grid;
+}
