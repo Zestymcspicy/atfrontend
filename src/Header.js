@@ -4,7 +4,7 @@ import Dropdown from './Dropdown';
 const Header = props => {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const toggleDropDown = e => {
+  const toggleDropdown = e => {
     e.preventDefault();
     setDropdownOpen(!dropdownOpen);
   }
@@ -43,7 +43,7 @@ const Header = props => {
       {props.user &&
       <button
         style={styles.dropdownButton}
-        onClick={toggleDropDown}>
+        onClick={toggleDropdown}>
         <div style={styles.buttonDiv}></div>
         <div style={styles.buttonDiv}></div>
         <div style={styles.buttonDiv}></div>
@@ -51,10 +51,12 @@ const Header = props => {
       }
         {dropdownOpen && <Dropdown
           user={props.user}
-          toggleDropDown={toggleDropDown}
+          toggleDropdown={toggleDropdown}
           setUser={props.setUser}
           location={props.location}
           setLocation={props.setLocation}
+          adminArchive={props.adminArchive}
+          setAdminArchive={props.setAdminArchive}
           setData={props.setData}/>}
       <h1 style={styles.title}>Activity Tracker</h1>
     </div>

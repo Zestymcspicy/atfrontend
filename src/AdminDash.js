@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Profile from './Profile.js';
+import Archive from './Archive.js';
 
 export default function AdminDash(props) {
   const [focusedUser, setFocusedUser] = useState();
@@ -8,6 +9,16 @@ export default function AdminDash(props) {
     setFocusedUser(user);
     setAdminLocation('profile')
   }
+  useEffect(() => {
+    if(props.adminArchive===true){
+      setAdminLocation('archive')
+    } else if(props.adminArchive===false){
+      focusedUser?
+      setAdminLocation('profile')
+      :
+      setAdminLocation('AdminHome')
+    }
+  }, [setAdminLocation, focusedUser, props.adminArchive]);
 
   return(
     <div>
@@ -30,6 +41,14 @@ export default function AdminDash(props) {
     case 'profile':
     return(
       <Profile
+        updateTaskAndUser={props.updateTaskAndUser}
+        user={focusedUser}
+        />
+    )
+    case 'archive':
+    return(
+      <Archive
+        updateTaskAndUser={props.updateTaskAndUser}
         user={focusedUser}
         />
     )

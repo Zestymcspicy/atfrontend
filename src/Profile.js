@@ -18,7 +18,7 @@ export default function Profile(props){
 
   return(
     <div>
-    <h2>Hello {props.user.name}</h2>
+    <h2>{props.user.name}</h2>
     {modalOpen &&
       <NewTaskModal
       setUser={props.setUser}
