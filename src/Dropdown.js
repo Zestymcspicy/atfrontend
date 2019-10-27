@@ -14,7 +14,7 @@ export default function Dropdown(props) {
     if(props.user.isAdmin!==true){
       props.setLocation('archive')
     } else if (props.user.isAdmin) {
-      props.setAdminArchive(true);
+      props.setAdminLocation('archive');
     }
   }
 
@@ -23,7 +23,7 @@ export default function Dropdown(props) {
     if(props.user.isAdmin!==true){
       props.setLocation('profile')
     } else if (props.user.isAdmin){
-      props.setAdminArchive(false);
+      props.setAdminLocation('profile');
     }
   }
 
@@ -39,9 +39,12 @@ export default function Dropdown(props) {
   return(
     <div className="Dropdown">
       {props.user.isAdmin &&
-        <button style={styles.dropdownTab} onClick={()=>console.log("adminHome")}>Admin Home</button>
+        <button style={styles.dropdownTab} onClick={e=>{
+            props.toggleDropdown(e)
+            props.setAdminLocation('AdminHome')}
+          }>Admin Home</button>
       }
-      {props.location!=="archive"&&props.adminArchive===false?
+      {props.location!=="archive"&&props.adminLocation!=="archive"?
       <button style={styles.dropdownTab} onClick={goToArchive}>Archive</button>
       :
       <button style={styles.dropdownTab}

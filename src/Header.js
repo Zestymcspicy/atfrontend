@@ -55,8 +55,8 @@ const Header = props => {
           setUser={props.setUser}
           location={props.location}
           setLocation={props.setLocation}
-          adminArchive={props.adminArchive}
-          setAdminArchive={props.setAdminArchive}
+          adminLocation={props.adminLocation}
+          setAdminLocation={props.setAdminLocation}
           setData={props.setData}/>}
       <h1 style={styles.title}>Activity Tracker</h1>
     </div>

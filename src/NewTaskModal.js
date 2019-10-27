@@ -9,7 +9,11 @@ export default function NewTaskModal(props) {
 
   useEffect(() => {
     var d = new Date();
-    d.setDate(d.getDate() + (1 + 7 - d.getDay()) % 7);
+    if(d.getDay()<=1){
+      d.setDate(d.getDate() + (1 + 7 - d.getDay()));
+    } else {
+      d.setDate(d.getDate() + (1 + 14 - d.getDay()));
+    }
     d=d.toDateString()
     console.log(d)
     setDueDate(d);

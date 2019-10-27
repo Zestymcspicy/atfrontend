@@ -13,6 +13,7 @@ function App() {
   const [location, setLocation] = useState('start');
   const [data, setData] = useState([]);
   const [adminArchive, setAdminArchive] = useState(false);
+  const [adminLocation, setAdminLocation] = useState('AdminHome');
 
   const updateTaskAndUser = task => {
 
@@ -52,8 +53,8 @@ function App() {
         setUser={setUser}
         setData={setData}
         location={location}
-        adminArchive={adminArchive}
-        setAdminArchive={setAdminArchive}
+        adminLocation={adminLocation}
+        setAdminLocation={setAdminLocation}
         setLocation={setLocation}/>
       {(function(){
         switch(location){
@@ -77,7 +78,8 @@ function App() {
               return<AdminDash
                 data={data}
                 user={user}
-                adminArchive={adminArchive}
+                adminLocation={adminLocation}
+                setAdminLocation={setAdminLocation}
                 updateTaskAndUser={updateTaskAndUser}
                 />
             case 'archive':
