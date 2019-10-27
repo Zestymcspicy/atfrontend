@@ -15,25 +15,7 @@ export default function Profile(props){
   const weeklyActive = weekly?"activeTab":"inactiveTab";
   const longTermActive = weekly?"inactiveTab":"activeTab";
 
-  const updateTaskAndUser = task => {
-    let newTaskList = props.user.tasks.filter(x => x._id !== task._id);
-    newTaskList.push(task)
-    let user = props.user;
-    user.tasks = newTaskList;
-    // return fetch('https://activity-tracker-hearthstone.herokuapp.com/users/update', {
-    return fetch('http://localhost:5000/users/update', {
-      method: 'PUT',
-      body: JSON.stringify({task, user}),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    // props.setUser(repUser)
-    .then(res => {
-      console.log(res);
-      return res.json();
-    }).then(data => props.setUser(data))
-  }
+
   return(
     <div>
     <h2>Hello {props.user.name}</h2>
@@ -60,7 +42,7 @@ export default function Profile(props){
     <ol>
     {props.user.tasks.filter(x => x.longTermGoal===!weekly && !x.completed).map((task, index) => {
       return (<li style={{listStyleType:"none"}} key={index}>
-        <TaskCard updateTaskAndUser={updateTaskAndUser} task={task}/>
+        <TaskCard updateTaskAndUser={props.updateTaskAndUser} task={task}/>
         </li>)
     } )}
     </ol>

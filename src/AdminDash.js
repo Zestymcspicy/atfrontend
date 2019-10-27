@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import Profile from './Profile.js';
 
 export default function AdminDash(props) {
+  const [focusedUser, setFocusedUser] = useState();
   const [adminLocation, setAdminLocation] = useState('AdminHome');
   const OpenDetailScreen = user  => {
-    console.log(user)
+    setFocusedUser(user);
+    setAdminLocation('profile')
   }
 
   return(
@@ -24,6 +27,12 @@ export default function AdminDash(props) {
       }
       )}
     </ol>)
+    case 'profile':
+    return(
+      <Profile
+        user={focusedUser}
+        />
+    )
     default:
       return <p>whoops</p>;
   }

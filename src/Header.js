@@ -53,6 +53,7 @@ const Header = props => {
           user={props.user}
           toggleDropDown={toggleDropDown}
           setUser={props.setUser}
+          location={props.location}
           setLocation={props.setLocation}
           setData={props.setData}/>}
       <h1 style={styles.title}>Activity Tracker</h1>

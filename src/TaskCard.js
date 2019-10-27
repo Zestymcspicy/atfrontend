@@ -4,18 +4,18 @@ export default function TaskCard(props){
 
   //change state back to false
   const [expanded, setExpanded] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState(props.task.completed);
 
   const toggleCompleted = () => setCompleted(!completed);
   const toggleExpanded = () => setExpanded(!expanded);
 
   const updateTask = e => {
-    toggleExpanded();
-    setCompleted(false);
     e.preventDefault();
     let repTask = props.task
     repTask.completed=completed;
     props.updateTaskAndUser(repTask)
+    toggleExpanded();
+    setCompleted(false);
     console.log(repTask)
     console.log(props.task)
   }
@@ -42,7 +42,8 @@ export default function TaskCard(props){
           Completed?
           <input
           value={completed}
-          onClick={toggleCompleted}
+          checked={completed}
+          onChange={toggleCompleted}
           type="checkbox"
           id="CompletedCheck" />
         </label>

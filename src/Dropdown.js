@@ -2,11 +2,20 @@ import React from 'react';
 
 export default function Dropdown(props) {
 
-  function signOut(e) {
+  const signOut = e => {
     props.toggleDropDown(e);
     props.setUser();
     props.setData([]);
     props.setLocation('start')
+  }
+
+  const goToArchive = e => {
+    console.log("archive")
+    if(props.user.isAdmin!==true){
+      props.setLocation('archive')
+    } else if (props.user.isAdmin) {
+      console.log("workingonit")
+    }
   }
 
   const styles = {
@@ -20,8 +29,15 @@ export default function Dropdown(props) {
   }
   return(
     <div className="Dropdown">
-      <button style={styles.dropdownTab} onClick={signOut}>Sign Out</button>
-      <button style={styles.dropdownTab} onClick={props.setLocation('archive')}>Archive</button>
+      <button style={styles.dropdownTab} onClick={()=>signOut}>Sign Out</button>
+      {props.location!=="archive"?
+      <button style={styles.dropdownTab} onClick={goToArchive}>Archive</button>
+      :
+      <button style={styles.dropdownTab}
+        onClick={()=>props.setLocation('profile')}>
+        Profile
+      </button>
+      }
     </div>
   )
 }
