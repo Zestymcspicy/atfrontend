@@ -22,7 +22,12 @@ export default function TaskCard(props){
 
   const upOrDown = expanded?"Up":"Down";
 
-
+  const styles = {
+    submitHelper: {
+      marginLeft: "50%",
+      marginBottom: "10px"
+    }
+  }
   return(
     <div className="TaskCard">
     <div className="CardTop">
@@ -47,7 +52,11 @@ export default function TaskCard(props){
           type="checkbox"
           id="CompletedCheck" />
         </label>
-        <input type="submit" value="Submit"></input>
+        <input
+          style={styles.submitHelper}
+          type="submit"
+          value="Submit"
+          className="StandardButton"/>
       </form>
       </div>}
     </div>

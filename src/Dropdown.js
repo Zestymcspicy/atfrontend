@@ -3,7 +3,7 @@ import React from 'react';
 export default function Dropdown(props) {
 
   const signOut = e => {
-    props.toggleDropDown(e);
+    props.toggleDropdown(e);
     props.setUser();
     props.setData([]);
     props.setLocation('start')
@@ -14,14 +14,13 @@ export default function Dropdown(props) {
     if(props.user.isAdmin!==true){
       props.setLocation('archive')
     } else if (props.user.isAdmin) {
-      console.log("workingonit")
       props.setAdminArchive(true);
     }
   }
 
   const returnToProfile = e => {
+    props.toggleDropdown(e)
     if(props.user.isAdmin!==true){
-      props.toggleDropdown(e)
       props.setLocation('profile')
     } else if (props.user.isAdmin){
       props.setAdminArchive(false);
@@ -39,7 +38,9 @@ export default function Dropdown(props) {
   }
   return(
     <div className="Dropdown">
-      <button style={styles.dropdownTab} onClick={()=>signOut}>Sign Out</button>
+      {props.user.isAdmin &&
+        <button style={styles.dropdownTab} onClick={()=>console.log("adminHome")}>Admin Home</button>
+      }
       {props.location!=="archive"&&props.adminArchive===false?
       <button style={styles.dropdownTab} onClick={goToArchive}>Archive</button>
       :
@@ -48,6 +49,7 @@ export default function Dropdown(props) {
         Profile
       </button>
       }
+      <button style={styles.dropdownTab} onClick={e=>signOut(e)}>Sign Out</button>
     </div>
   )
 }
