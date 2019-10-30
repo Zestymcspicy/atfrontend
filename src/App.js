@@ -21,8 +21,8 @@ function App() {
     newTaskList.push(task)
     let updatedUser = user;
     updatedUser.tasks = newTaskList;
-    // return fetch('https://activity-tracker-hearthstone.herokuapp.com/users/update', {
-    return fetch('http://localhost:5000/users/update', {
+    return fetch('https://activity-tracker-hearthstone.herokuapp.com/users/update', {
+    // return fetch('http://localhost:5000/users/update', {
       method: 'PUT',
       body: JSON.stringify({task, updatedUser}),
       headers: {

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 export default function NewUserQuestions(props) {
-  const [newUserTasks, setNewUserTasks] = useState([]);
-  const [longTerm, setlongTerm] = useState(["Driver's License or State Issued ID", "Social Security Card", "Birth Certificate"]);
+  const [newUserTasks, setNewUserTasks] = useState();
+  const [longTerm, setlongTerm] = useState(["Go to Peasley Center", "Driver's License or State Issued ID", "Social Security Card", "Birth Certificate"]);
   const addNewUserTotalTasks = e => {
     e.preventDefault()
-    // return fetch("https://activity-tracker-hearthstone.herokuapp.com/tasks/addmultiple", {
-    return fetch('http://localhost:5000/tasks/addmultiple', {
+    return fetch("https://activity-tracker-hearthstone.herokuapp.com/tasks/addmultiple", {
+    // return fetch('http://localhost:5000/tasks/addmultiple', {
       method: "POST",
       body: JSON.stringify({
         user_id: props.user._id,
@@ -23,7 +23,6 @@ export default function NewUserQuestions(props) {
     })
   }
 
-  // let taskList = ["Get Peasley Evaluation"];
   const handleIDchange = e => {
     let target = e.target;
     let value = target.value
@@ -58,11 +57,28 @@ export default function NewUserQuestions(props) {
     }
   }
 
+  const addToLongTerm = e => {
+    let value = e.target.value;
+    console.log(value);
+    // let newTaskList = newUserTasks
+    if(longTerm.indexOf(value)===-1){
+      // newTaskList.push(value);
+      setlongTerm([...longTerm, value]);
+    }
+  }
+
   const removeFromTaskList = e => {
     let value=e.target.value
     let newTaskList;
     newTaskList = newUserTasks.filter( x => x !== value)
     setNewUserTasks(newTaskList);
+  }
+
+  const removeFromLongTerm = e => {
+    let value=e.target.value
+    let newLongTerm;
+    newLongTerm = longTerm.filter( x => x !== value)
+    setlongTerm(newLongTerm);
   }
 
   return(
@@ -129,6 +145,17 @@ export default function NewUserQuestions(props) {
       No<input type="radio"
       value="Get a sponsor"
       onClick={addToTaskList}
+      name="sponsor"></input>
+      </div>
+      <div>
+      <p>Are you on paper?</p>
+      Yes<input type="radio"
+      value="Get off paper"
+      onClick={removeFromLongTerm}
+      name="sponsor"></input>
+      No<input type="radio"
+      value="Get off paper"
+      onClick={addToLongTerm}
       name="sponsor"></input>
       </div>
       <input type="submit" value="Submit"></input>
