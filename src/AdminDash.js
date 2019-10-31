@@ -9,6 +9,10 @@ export default function AdminDash(props) {
     setFocusedUser(user);
     props.setAdminLocation('profile')
   }
+
+  const OpenEditModal = user => {
+    console.log(user)
+  }
   // useEffect(() => {
   //   if(props.adminArchive===true){
   //     setAdminLocation('archive')
@@ -28,11 +32,20 @@ export default function AdminDash(props) {
         case 'AdminHome':
         return(
         <ol>{props.data.map((x,index) => {
-        return(<li
-          onClick={()=>OpenDetailScreen(x)}
-          key={index}>
+        return(<li key={index}>
           <div className="AdminUserListEntry">
             {x.name}
+            <div>
+              <button
+              onClick={()=>OpenDetailScreen(x)}
+              className="StandardButton"
+              >View</button>
+              <button
+              onClick={()=>OpenEditModal(x)}
+              className="StandardButton"
+              style={{backgroundColor:"red !important",marginLeft: "20px"}}
+              >Edit</button>
+            </div>
           </div>
         </li>)
       }
