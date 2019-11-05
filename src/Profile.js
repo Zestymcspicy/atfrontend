@@ -21,6 +21,7 @@ export default function Profile(props){
     <h2>{props.user.name}</h2>
     {modalOpen &&
       <NewTaskModal
+      url={props.url}
       setUser={props.setUser}
       user={props.user}
       toggleModal={toggleModal}/>

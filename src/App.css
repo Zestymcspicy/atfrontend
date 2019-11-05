@@ -5,7 +5,7 @@
 .StandardButton{
   min-height: 36px;
   min-width: max-content;
-  width: 80px;
+  width: 65px;
   border-radius: 10% 10% 10% 10%;
   background-color: #113450;
   border: 1px solid #113450;
@@ -239,6 +239,7 @@ ol{
 }
 
 .AdminUserListEntry {
+  display: flex;
   margin: 4px auto;
   max-width: 400px;
   text-align: left;
@@ -247,8 +248,116 @@ ol{
   box-shadow: 2px 2px #b6b0b0;
 }
 
+
 .AdminUserListEntry:hover {
   cursor: pointer;
+}
+
+.adminListButtonBox {
+  width: 45%;
+  margin-left: auto;
+}
+
+.adminListButtonBox > button{
+  margin: 0 5%;
+}
+
+.ModalOverlay{
+  background-color: rgba(0, 0, 0, 0.48);
+  z-index: 19;
+  position: fixed;
+  width: 100%;
+  height: 200%;
+  top: -3vh;
+}
+
+.AdminEditModal{
+  margin: 20% auto;
+  background-color: white;
+  border: 1px white solid;
+  z-index: 20;
+  height: 200px;
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.AdminModalButton{
+  border: none;
+  height: 36px;
+  min-width: max-content;
+  width: 65px;
+  border-radius: 10% 10% 10% 10%;
+}
+
+.AdminEditModalTop{
+  display: flex;
+  margin: 0 auto;
+  width:100%;
+  /* max-height: 20px; */
+}
+
+.AdminEditModalTop > h3 {
+  /* max-height: 40px; */
+  margin: 10px auto 0 auto;
+}
+
+.AdminEditModalTop > span{
+  font-size: 40px;
+  margin: -7px 8px 0 0;
+  /* max-height: 40px; */
+}
+
+.AdminButtonDiv{
+  height: 20px;
+  width: 100%;
+}
+
+.AdminButtonDiv > div {
+  justify-content: space-around;
+  display: flex;
+}
+
+.AdminButtonDiv > div > button {
+  /* background-color: green; */
+  color: white;
+}
+
+.DeleteUserButton{
+  background-color: red;
+  color: white;
+  margin: 10px auto 0 auto;
+}
+
+.AreYouSureModal {
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  border: black 1px solid;
+  width: 300px;
+  height: 200px;
+  flex-wrap:wrap;
+  margin: 20% auto 0 auto;
+}
+
+.AreYouSureModal > span {
+  margin: auto 0 15px 0;
+}
+
+.AreYouSureModal > button {
+  background-color: red;
+  color: white;
+}
+
+.DeleteOverlay{
+  background-color: #FFFFFF;
+  left: 0;
+  opacity: 1;
+  z-index: 23;
+  position: fixed;
+  width: 100%;
+  height: 200%;
+  top: -3vh;
 }
 
 .Dropdown {

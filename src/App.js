@@ -9,10 +9,12 @@ import './App.css';
 
 function App() {
 
+  const [url, setUrl] = useState('http://localhost:5000/')
+  // const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
   const [user, setUser] = useState();
   const [location, setLocation] = useState('start');
   const [data, setData] = useState([]);
-  const [adminArchive, setAdminArchive] = useState(false);
+  // const [adminArchive, setAdminArchive] = useState(false);
   const [adminLocation, setAdminLocation] = useState('AdminHome');
 
   const updateTaskAndUser = task => {
@@ -21,7 +23,7 @@ function App() {
     newTaskList.push(task)
     let updatedUser = user;
     updatedUser.tasks = newTaskList;
-    return fetch('https://activity-tracker-hearthstone.herokuapp.com/users/update', {
+    return fetch(`${url}users/update`, {
     // return fetch('http://localhost:5000/users/update', {
       method: 'PUT',
       body: JSON.stringify({task, updatedUser}),
@@ -60,22 +62,26 @@ function App() {
         switch(location){
           case 'start':
             return <EmailForm
+              url={url}
               setData={setData}
               setUser={setUser}
               setLocation={setLocation}/>;
             case 'profile':
               return <Profile
+                url={url}
                 user={user}
                 setUser={setUser}
                 setLocation={setLocation}
                 updateTaskAndUser={updateTaskAndUser}/>;
             case 'NewUserQuestions':
               return<NewUserQuestions
+                url={url}
                 user={user}
                 setUser={setUser}
                 setLocation={setLocation}/>
             case 'adminDash':
               return<AdminDash
+                url={url}
                 data={data}
                 user={user}
                 adminLocation={adminLocation}
