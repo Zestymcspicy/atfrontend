@@ -22,6 +22,23 @@ export default function AdminDash(props) {
     setFocusedUser(user);
   }
 
+  const adminUpdateTaskAndUser = task => {
+    console.log(focusedUser)
+    let updatedUser = focusedUser
+    return fetch(`${props.url}users/update`, {
+      method: 'PUT',
+      body: JSON.stringify({task, updatedUser}),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => res.json())
+    .then(returnedUser=>{
+      returnedUser = returnedUser.body
+      let newData= props.data.filter(x=> x._id!==returnedUser._id)
+      props.setData([...newData, returnedUser])
+    })
+  }
+
   const DeleteUser = () => {
     setVerify(false);
     ToggleEditModal();
@@ -129,15 +146,16 @@ export default function AdminDash(props) {
     return(
       <Profile
         setUser={setFocusedUser}
-        updateTaskAndUser={props.updateTaskAndUser}
+        updateTaskAndUser={adminUpdateTaskAndUser}
         user={focusedUser}
+        url={props.url}
         />
     )
     case 'archive':
     return(
       focusedUser?
       <Archive
-        updateTaskAndUser={props.updateTaskAndUser}
+        updateTaskAndUser={adminUpdateTaskAndUser}
         user={focusedUser}
         />
       :

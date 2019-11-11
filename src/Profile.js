@@ -41,7 +41,7 @@ export default function Profile(props){
     </div>
     <div className="ListBox">
     <ol>
-    {props.user.tasks.filter(x => x.longTermGoal===!weekly && !x.completed).map((task, index) => {
+    {props.user.tasks.filter(x => x.longTermGoal===!weekly).filter(x => x.completed!==true).map((task, index) => {
       return (<li style={{listStyleType:"none"}} key={index}>
         <TaskCard updateTaskAndUser={props.updateTaskAndUser} task={task}/>
         </li>)

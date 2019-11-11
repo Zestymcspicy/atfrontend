@@ -121,6 +121,10 @@ input:checked + .slider:before {
   font-size: 40px;
 }
 
+.CloseButton:hover{
+  cursor: pointer;
+}
+
 input {
   min-height: 20px;
   min-width: 20px;

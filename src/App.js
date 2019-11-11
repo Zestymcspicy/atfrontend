@@ -9,8 +9,8 @@ import './App.css';
 
 function App() {
 
-  const [url, setUrl] = useState('http://localhost:5000/')
-  // const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
+  // const [url, setUrl] = useState('http://localhost:5000/')
+  const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
   const [user, setUser] = useState();
   const [location, setLocation] = useState('start');
   const [data, setData] = useState([]);
@@ -31,22 +31,16 @@ function App() {
         "Content-Type": "application/json"
       }
     })
-    // props.setUser(repUser)
     .then(res => {
       console.log(res);
       return res.json();
-    }).then(data => setUser(data))
+    })
+    .then(resData => {
+      setUser(resData.body)
+
+    })
   }
-  // const [user, setUser] = useState({
-  //   date: "2019-10-13T04:02:09.438Z",
-  //   email: "HopsTheDog@dogmail.com",
-  //   isAdmin: false,
-  //   name: "hop",
-  //   // tasks: {},
-  //   tasks: [{_id: "idThe1st",name: "cat", longTermGoal:false},
-  //       {_id: "idThe2nd", name: "face", longTermGoal:true}],
-  //   __v: 0,
-  //   _id: "5da2a1c12b83b52660df59c5"})
+
 
   return (
     <div className="App">
@@ -82,6 +76,7 @@ function App() {
             case 'adminDash':
               return<AdminDash
                 url={url}
+                setData={setData}
                 data={data}
                 user={user}
                 adminLocation={adminLocation}
