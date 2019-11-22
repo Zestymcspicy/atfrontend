@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function NewUserQuestions(props) {
-  const [newUserTasks, setNewUserTasks] = useState();
+  const [newUserTasks, setNewUserTasks] = useState([]);
   const [longTerm, setlongTerm] = useState(["Go to Peasley Center", "Driver's License or State Issued ID", "Social Security Card", "Birth Certificate"]);
   const addNewUserTotalTasks = e => {
     e.preventDefault()
@@ -151,12 +151,23 @@ export default function NewUserQuestions(props) {
       <p>Are you on paper?</p>
       Yes<input type="radio"
       value="Get off paper"
-      onClick={removeFromLongTerm}
-      name="sponsor"></input>
+      onClick={addToLongTerm}
+      name="paper"></input>
       No<input type="radio"
       value="Get off paper"
+      onClick={removeFromLongTerm}
+      name="paper"></input>
+      </div>
+      <div>
+      <p>Do you have a promary care physician?</p>
+      Yes<input type="radio"
+      value="Get a primary care physician"
+      onClick={removeFromLongTerm}
+      name="paper"></input>
+      No<input type="radio"
+      value="Get a primary care physician"
       onClick={addToLongTerm}
-      name="sponsor"></input>
+      name="paper"></input>
       </div>
       <input type="submit" value="Submit"></input>
       </form>
