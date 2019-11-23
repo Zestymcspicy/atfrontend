@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
 
-export default function EmailForm(props) {
+export default function NameForm(props) {
 
-  const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [password2, setPassword2] = useState("")
@@ -22,20 +21,19 @@ export default function EmailForm(props) {
     setPassword2(e.target.value)
   }
 
-  const checkEmail = (e) => {
+  const checkName = (e) => {
     let incomingUser;
     e.preventDefault()
     if(isNew){
        incomingUser = {
         name: name,
-        email: email,
         password: password,
         password2: password2
       }
       sendUser(incomingUser, "register")
     } else {
       incomingUser = {
-        email: email,
+        name: name,
         password: password
       }
       sendUser(incomingUser, "login")
@@ -44,7 +42,6 @@ export default function EmailForm(props) {
 
   function sendUser(incomingUser, type){
     fetch(`${props.url}users/${type}`, {
-    // fetch(`http://localhost:5000/users/${type}`, {
       method: 'POST',
       body: JSON.stringify(incomingUser),
       headers: {
@@ -81,9 +78,7 @@ export default function EmailForm(props) {
         <span className="slider"></span>
       </label>
     </span>
-      <form onSubmit={checkEmail}>
-      {isNew &&
-        <>
+      <form onSubmit={checkName}>
         <label>
           Name:<br/>
           <input
@@ -92,18 +87,6 @@ export default function EmailForm(props) {
           value={name}
           name="name"
           type="text" />
-        </label>
-        <br/>
-        </>
-      }
-        <label>
-          Email:<br/>
-          <input
-          className="formInput"
-          onChange={e=>setEmail(e.target.value)}
-          value={email}
-          name="email"
-          type="email" />
         </label>
         <br/>
         <label>

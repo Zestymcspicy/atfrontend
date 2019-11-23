@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Header from './Header.js';
-import EmailForm from './EmailForm.js';
+import NameForm from './NameForm.js';
 import Profile from './Profile.js';
 import NewUserQuestions from './NewUserQuestions.js';
 import AdminDash from './AdminDash.js'
@@ -55,7 +55,7 @@ function App() {
       {(function(){
         switch(location){
           case 'start':
-            return <EmailForm
+            return <NameForm
               url={url}
               setData={setData}
               setUser={setUser}
