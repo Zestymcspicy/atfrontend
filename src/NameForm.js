@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 export default function NameForm(props) {
 
+  const [error, setError] = useState("");
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [password2, setPassword2] = useState("")
@@ -22,8 +23,8 @@ export default function NameForm(props) {
   }
 
   const checkName = (e) => {
+    e.preventDefault();
     let incomingUser;
-    e.preventDefault()
     if(isNew){
        incomingUser = {
         name: name,
@@ -49,6 +50,19 @@ export default function NameForm(props) {
       }
     }).then(res => {
       console.log(res)
+      if(res.status>=400){
+        console.log("error")
+        return res.json()
+        .then(errors => {
+          // console.log(errors);
+          let errString = ""
+          for(const err in errors){
+            errString+=errors[err]
+          }
+
+          return setError(errString);
+        })
+      }
       return res.json()
     }).then(data => {
       console.log(data)
@@ -62,7 +76,11 @@ export default function NameForm(props) {
       :
       props.setLocation('NewUserQuestions');
     })
-    .catch(err => console.log(err))
+    .catch(errs => {
+      for(const err in errs){
+        setError(errs[err])
+      }
+    })
   }
   return (
     <div className="formDiv">
@@ -89,6 +107,12 @@ export default function NameForm(props) {
           type="text" />
         </label>
         <br/>
+        {error!=="" &&
+          <div>
+          <span className="errorMessage">{error}</span>
+          <br/>
+          </div>
+        }
         <label>
           Password:<br/>
           <input
@@ -105,6 +129,7 @@ export default function NameForm(props) {
             {passwordMatch===false &&
               <span className="errorMessage">Passwords Must Match</span>
             }
+
             <input
             className="formInput"
             onChange={e=> checkPassword2(e)}

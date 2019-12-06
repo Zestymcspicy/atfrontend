@@ -159,15 +159,15 @@ export default function NewUserQuestions(props) {
       name="paper"></input>
       </div>
       <div>
-      <p>Do you have a promary care physician?</p>
+      <p>Do you have a primary care physician?</p>
       Yes<input type="radio"
       value="Get a primary care physician"
       onClick={removeFromLongTerm}
-      name="paper"></input>
+      name="physician"></input>
       No<input type="radio"
       value="Get a primary care physician"
       onClick={addToLongTerm}
-      name="paper"></input>
+      name="physician"></input>
       </div>
       <input type="submit" value="Submit"></input>
       </form>
