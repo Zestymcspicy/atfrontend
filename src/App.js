@@ -9,8 +9,8 @@ import './App.css';
 
 function App() {
 
-  const [url, setUrl] = useState('http://localhost:5000/')
-  // const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
+  // const [url, setUrl] = useState('http://localhost:5000/')
+  const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
   const [user, setUser] = useState();
   const [location, setLocation] = useState('start');
   const [data, setData] = useState([]);

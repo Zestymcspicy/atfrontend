@@ -4,11 +4,11 @@ import React, { useState } from "react";
 export default function NameForm(props) {
 
   const [error, setError] = useState("");
-  const [name, setName] = useState("")
-  const [password, setPassword] = useState("")
-  const [password2, setPassword2] = useState("")
-  const [passwordMatch, setPasswordMatch] = useState(false)
-  const [isNew, setIsNew] = useState(false)
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState(false);
+  const [isNew, setIsNew] = useState(false);
 
   const toggleIsNew = () => {
     setIsNew(!isNew);
@@ -86,7 +86,9 @@ export default function NameForm(props) {
     <div className="formDiv">
 
     <span>
-      <span style={{marginRight: "12px"}}>New User?</span>
+      <span>New User?</span>
+      <br/>
+      <span style={{marginRight: "12px"}}>No</span>
       <label className="switch">
         <input
           onChange={toggleIsNew}
@@ -95,6 +97,7 @@ export default function NameForm(props) {
           name="newUser"/>
         <span className="slider"></span>
       </label>
+      <span style={{marginLeft: "12px"}}>Yes</span>
     </span>
       <form onSubmit={checkName}>
         <label>
@@ -115,6 +118,12 @@ export default function NameForm(props) {
         }
         <label>
           Password:<br/>
+        {isNew &&
+          password.length<8 &&
+              <div>
+                <span className="errorMessage">Password Must Be At Least 8 Characters</span>
+              </div>
+            }
           <input
           className="formInput"
           onChange={e=>setPassword(e.target.value)}

@@ -5,18 +5,28 @@ export default function NewTaskModal(props) {
   const [taskName, setTaskName] = useState("");
   const [longTermGoal, setLongTermGoal] = useState(false);
   const [dueDate, setDueDate] = useState();
-  const today = new Date(Date.now()).toDateString();
+  const today = new Date();
 
   useEffect(() => {
-    var d = new Date();
-    if(d.getDay()<=1){
-      d.setDate(d.getDate() + (1 + 7 - d.getDay()));
-    } else {
-      d.setDate(d.getDate() + (1 + 14 - d.getDay()));
+    var shortDueDate = new Date();
+    // if(d.getDay()<=1){
+    //   d.setDate(d.getDate() + (1 + 7 - d.getDay()));
+    // } else {
+    //   d.setDate(d.getDate() + (1 + 14 - d.getDay()));
+    // }
+    let day = shortDueDate.getDay();
+    if(day===1){
+      shortDueDate.setDate(shortDueDate.getDate()+7);
     }
-    d=d.toDateString()
-    console.log(d)
-    setDueDate(d);
+    if(day===0){
+      shortDueDate.setDate(shortDueDate.getDate()+8);
+    }
+    if(day>1){
+      shortDueDate.setDate(shortDueDate.getDate()+15-day);
+    }
+    shortDueDate=shortDueDate.toDateString()
+    console.log(shortDueDate)
+    setDueDate(shortDueDate);
   }, [setDueDate])
 
   const toggleIsLongTerm = () => {
