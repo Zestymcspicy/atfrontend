@@ -50,7 +50,11 @@ export default function AdminDash(props) {
       body: JSON.stringify({_id: `${focusedUser._id}`})
     })
     .then(res => res.json())
-    .then(res => console.log(res))
+    .then(res => {
+      console.log(res);
+      let newData = props.data.filter(x => x._id!==focusedUser._id);
+      props.setData(newData);
+    })
     .catch(err=> console.log(err))
   }
 
