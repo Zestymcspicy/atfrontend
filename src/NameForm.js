@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 
 export default function NameForm(props) {
@@ -82,9 +83,9 @@ export default function NameForm(props) {
       }
     })
   }
+
   return (
     <div className="formDiv">
-
     <span>
       <span>New User?</span>
       <br/>

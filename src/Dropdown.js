@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 
 export default function Dropdown(props) {
 
@@ -38,21 +40,28 @@ export default function Dropdown(props) {
   }
   return(
     <div className="Dropdown">
+      <Router>
       {props.user.isAdmin &&
         <button style={styles.dropdownTab} onClick={e=>{
             props.toggleDropdown(e)
-            props.setAdminLocation('AdminHome')}
-          }>Admin Home</button>
+          }}><Link to='/adminDash'>Admin Home</Link></button>
       }
       {props.location!=="archive"&&props.adminLocation!=="archive"?
-      <button style={styles.dropdownTab} onClick={goToArchive}>Archive</button>
+      <button
+        style={styles.dropdownTab}
+        onClick={goToArchive}>
+        <Link to="/archive">Archive</Link>
+    </button>
       :
       <button style={styles.dropdownTab}
         onClick={e=>returnToProfile(e)}>
-        Profile
+        <Link to="/profile">Profile</Link>
       </button>
       }
-      <button style={styles.dropdownTab} onClick={e=>signOut(e)}>Sign Out</button>
+      <button style={styles.dropdownTab} onClick={e=>signOut(e)}>
+        <Link to='/'>Sign Out</Link>
+      </button>
+      </Router>
     </div>
   )
 }

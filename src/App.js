@@ -1,4 +1,11 @@
 import React, {useState} from 'react';
+import {
+  Redirect,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import Header from './Header.js';
 import NameForm from './NameForm.js';
 import Profile from './Profile.js';
@@ -9,8 +16,8 @@ import './App.css';
 
 function App() {
 
-  // const [url, setUrl] = useState('http://localhost:5000/')
-  const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
+  const url  = 'http://localhost:5000/'
+  // const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
   const [user, setUser] = useState();
   const [location, setLocation] = useState('start');
   const [data, setData] = useState([]);
@@ -24,7 +31,7 @@ function App() {
     let updatedUser = user;
     updatedUser.tasks = newTaskList;
     return fetch(`${url}users/update`, {
-    // return fetch('http://localhost:5000/users/update', {
+
       method: 'PUT',
       body: JSON.stringify({task, updatedUser}),
       headers: {
@@ -50,49 +57,68 @@ function App() {
         setData={setData}
         location={location}
         adminLocation={adminLocation}
-        setAdminLocation={setAdminLocation}
-        setLocation={setLocation}/>
-      {(function(){
-        switch(location){
-          case 'start':
-            return <NameForm
-              url={url}
-              setData={setData}
-              setUser={setUser}
-              setLocation={setLocation}/>;
-            case 'profile':
-              return <Profile
+        setAdminLocation={setAdminLocation} />
+      <Switch>
+              <Route path='/NewUserQuestions'>
+              <NewUserQuestions
                 url={url}
                 user={user}
                 setUser={setUser}
-                setLocation={setLocation}
-                updateTaskAndUser={updateTaskAndUser}/>;
-            case 'NewUserQuestions':
-              return<NewUserQuestions
-                url={url}
-                user={user}
-                setUser={setUser}
-                setLocation={setLocation}/>
-            case 'adminDash':
-              return<AdminDash
+                />
+              </Route>
+              <Route path='/'>
+              <NameForm
                 url={url}
                 setData={setData}
-                data={data}
-                user={user}
-                adminLocation={adminLocation}
-                setAdminLocation={setAdminLocation}
-                updateTaskAndUser={updateTaskAndUser}
+                setUser={setUser}
                 />
-            case 'archive':
-              return <Archive
-                user={user}
-                updateTaskAndUser={updateTaskAndUser}
-                />
-          default:
-            return <p>whoops</p>;
-        }
-      })()}
+              </Route>
+              <PrivateRoute>
+              <Route path='/profile'>
+                <Profile
+                  url={url}
+                  user={user}
+                  setUser={setUser}
+                  updateTaskAndUser={updateTaskAndUser} />
+                </Route>
+                <Route path='/adminDash'>
+                <AdminDash
+                  url={url}
+                  setData={setData}
+                  data={data}
+                  user={user}
+                  adminLocation={adminLocation}
+                  setAdminLocation={setAdminLocation}
+                  updateTaskAndUser={updateTaskAndUser} />
+                </Route>
+                <Route path='/archive'>
+                <Archive
+                  user={user}
+                  updateTaskAndUser={updateTaskAndUser} />
+                </Route>
+                </PrivateRoute>
+            </Switch>
     </div>
+  );
+}
+
+function PrivateRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        App.user ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
   );
 }
 
