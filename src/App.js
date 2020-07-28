@@ -19,10 +19,10 @@ function App() {
   const url  = 'http://localhost:5000/'
   // const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
   const [user, setUser] = useState();
-  const [location, setLocation] = useState('start');
+  // const [location, setLocation] = useState('start');
   const [data, setData] = useState([]);
   // const [adminArchive, setAdminArchive] = useState(false);
-  const [adminLocation, setAdminLocation] = useState('AdminHome');
+  // const [adminLocation, setAdminLocation] = useState('AdminHome');
 
   const updateTaskAndUser = task => {
 
@@ -51,13 +51,12 @@ function App() {
 
   return (
     <div className="App">
+      <Router>
       <Header
         user={user}
         setUser={setUser}
         setData={setData}
-        location={location}
-        adminLocation={adminLocation}
-        setAdminLocation={setAdminLocation} />
+         />
       <Switch>
               <Route path='/NewUserQuestions'>
               <NewUserQuestions
@@ -80,24 +79,23 @@ function App() {
                   user={user}
                   setUser={setUser}
                   updateTaskAndUser={updateTaskAndUser} />
-                </Route>
-                <Route path='/adminDash'>
+              </Route>
+              <Route path='/adminDash'>
                 <AdminDash
                   url={url}
                   setData={setData}
                   data={data}
                   user={user}
-                  adminLocation={adminLocation}
-                  setAdminLocation={setAdminLocation}
                   updateTaskAndUser={updateTaskAndUser} />
-                </Route>
-                <Route path='/archive'>
+              </Route>
+              <Route path='/archive'>
                 <Archive
                   user={user}
                   updateTaskAndUser={updateTaskAndUser} />
-                </Route>
-                </PrivateRoute>
+              </Route>
+              </PrivateRoute>
             </Switch>
+            </Router>
     </div>
   );
 }
