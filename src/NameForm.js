@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 
 export default function NameForm(props) {
@@ -14,6 +14,10 @@ export default function NameForm(props) {
   const toggleIsNew = () => {
     setIsNew(!isNew);
   }
+  
+  let history = useHistory();
+  let location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
 
   const checkPassword2 = e => {
     password===e.target.value?
@@ -52,7 +56,7 @@ export default function NameForm(props) {
     }).then(res => {
       console.log(res)
       if(res.status>=400){
-        console.log("error")
+        console.log(res)
         return res.json()
         .then(errors => {
           // console.log(errors);
@@ -70,12 +74,13 @@ export default function NameForm(props) {
       props.setUser(data.user);
       if(data.user.isAdmin){
         props.setData(data.allUsers);
-        return props.setLocation('adminDash');
+        history.replace(from);
+        history.push('adminDash');
       }
       type==="login"?
-      props.setLocation('profile')
+      history.push('profile')
       :
-      props.setLocation('NewUserQuestions');
+      history.push('NewUserQuestions');
     })
     .catch(errs => {
       for(const err in errs){

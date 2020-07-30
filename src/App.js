@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {
   Redirect,
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
-  Link
+  Link,
+  useLocation
 } from "react-router-dom";
 import Header from './Header.js';
 import NameForm from './NameForm.js';
@@ -13,6 +14,7 @@ import NewUserQuestions from './NewUserQuestions.js';
 import AdminDash from './AdminDash.js'
 import Archive from './Archive.js';
 import './App.css';
+
 
 function App() {
 
@@ -51,13 +53,12 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
       <Header
         user={user}
         setUser={setUser}
         setData={setData}
          />
-      <Switch>
+
               <Route path='/NewUserQuestions'>
               <NewUserQuestions
                 url={url}
@@ -65,47 +66,46 @@ function App() {
                 setUser={setUser}
                 />
               </Route>
-              <Route path='/'>
+              <Route exact path='/'>
               <NameForm
                 url={url}
                 setData={setData}
                 setUser={setUser}
                 />
               </Route>
-              <PrivateRoute>
-              <Route path='/profile'>
+
+              <PrivateRoute path='/profile'>
                 <Profile
                   url={url}
                   user={user}
                   setUser={setUser}
                   updateTaskAndUser={updateTaskAndUser} />
-              </Route>
-              <Route path='/adminDash'>
+              </PrivateRoute>
+              <PrivateRoute path='/adminDash'>
                 <AdminDash
                   url={url}
                   setData={setData}
                   data={data}
                   user={user}
                   updateTaskAndUser={updateTaskAndUser} />
-              </Route>
+              </PrivateRoute>
               <Route path='/archive'>
                 <Archive
                   user={user}
                   updateTaskAndUser={updateTaskAndUser} />
               </Route>
-              </PrivateRoute>
-            </Switch>
-            </Router>
+
     </div>
   );
 }
 
 function PrivateRoute({ children, ...rest }) {
+  let location = useLocation();  
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        App.user ? (
+        App.user!==undefined ? (
           children
         ) : (
           <Redirect
