@@ -14,7 +14,7 @@ export default function NameForm(props) {
   const toggleIsNew = () => {
     setIsNew(!isNew);
   }
-  
+
   let history = useHistory();
   let location = useLocation();
   let { from } = location.state || { from: { pathname: "/" } };
@@ -75,7 +75,7 @@ export default function NameForm(props) {
       if(data.user.isAdmin){
         props.setData(data.allUsers);
         history.replace(from);
-        history.push('adminDash');
+        return this.props.history.push('adminDash');
       }
       type==="login"?
       history.push('profile')

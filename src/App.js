@@ -13,6 +13,8 @@ import Profile from './Profile.js';
 import NewUserQuestions from './NewUserQuestions.js';
 import AdminDash from './AdminDash.js'
 import Archive from './Archive.js';
+import PrivateRoute from './PrivateRoute.js'
+import { AuthContext } from './context/auth.js'
 import './App.css';
 
 
@@ -52,6 +54,7 @@ function App() {
 
 
   return (
+    <AuthContext.Provider>
     <div className="App">
       <Header
         user={user}
@@ -74,14 +77,14 @@ function App() {
                 />
               </Route>
 
-              <PrivateRoute path='/profile'>
+              <PrivateRoute user={user} path='/profile'>
                 <Profile
                   url={url}
                   user={user}
                   setUser={setUser}
                   updateTaskAndUser={updateTaskAndUser} />
               </PrivateRoute>
-              <PrivateRoute path='/adminDash'>
+              <PrivateRoute user={user} path='/adminDash'>
                 <AdminDash
                   url={url}
                   setData={setData}
@@ -96,28 +99,9 @@ function App() {
               </Route>
 
     </div>
+  </AuthContext.Provider>
   );
 }
 
-function PrivateRoute({ children, ...rest }) {
-  let location = useLocation();  
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        App.user!==undefined ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/",
-              state: { from: location }
-            }}
-          />
-        )
-      }
-    />
-  );
-}
 
 export default App;

@@ -10,7 +10,7 @@ export default function AdminDash(props) {
 
   const OpenDetailScreen = user  => {
     setFocusedUser(user);
-    props.setAdminLocation('profile')
+  //   props.setAdminLocation('profile')
   }
 
   const ToggleEditModal = () => {
@@ -123,10 +123,6 @@ export default function AdminDash(props) {
     <div>
     {editModalOpen && <EditModal user={focusedUser}/>}
     <h2>ADMIN!!!!!!</h2>
-    {(function(){
-      switch(props.adminLocation) {
-        case 'AdminHome':
-        return(
         <ol>{props.data.filter(user => user.isAdmin===false).map((x,index) => {
         return(<li key={index}>
           <div className="AdminUserListEntry">
@@ -145,30 +141,24 @@ export default function AdminDash(props) {
         </li>)
       }
       )}
-    </ol>)
-    case 'profile':
-    return(
-      <Profile
-        setUser={setFocusedUser}
-        updateTaskAndUser={adminUpdateTaskAndUser}
-        user={focusedUser}
-        url={props.url}
-        />
-    )
-    case 'archive':
-    return(
-      focusedUser?
-      <Archive
-        updateTaskAndUser={adminUpdateTaskAndUser}
-        user={focusedUser}
-        />
-      :
-      <span>No user selected</span>
-    )
-    default:
-      return <p>whoops</p>;
-  }
-})()}
-    </div>
+    </ol>
+
+  </div>
   )
 }
+// {(function(){
+  // switch(props.adminLocation) {
+    // case 'AdminHome':
+    // return(
+// <Profile setUser={setFocusedUser}
+//   updateTaskAndUser={adminUpdateTaskAndUser}
+//   user={focusedUser}
+//   url={props.url}
+//   />
+//   focusedUser?
+//   <Archive
+//     updateTaskAndUser={adminUpdateTaskAndUser}
+//     user={focusedUser}
+//     />
+//   :
+//   <span>No user selected</span>
