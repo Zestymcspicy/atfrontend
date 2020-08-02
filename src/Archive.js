@@ -1,8 +1,14 @@
 import React from 'react';
 import TaskCard from './TaskCard';
+import {useHistory} from 'react-router-dom';
 
 
 export default function Archive(props) {
+
+  const history = useHistory();
+  if(props.user==undefined){
+    history.push('/')
+  }
 
   return(
     <div>

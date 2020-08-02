@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useAuth } from './context/auth'
 
 
 export default function NameForm(props) {
+
+
 
   const [error, setError] = useState("");
   const [name, setName] = useState("");
@@ -10,13 +13,14 @@ export default function NameForm(props) {
   const [password2, setPassword2] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(false);
   const [isNew, setIsNew] = useState(false);
+  // const { setAuthTokens } = useAuth();
 
   const toggleIsNew = () => {
     setIsNew(!isNew);
   }
 
-  let history = useHistory();
-  let location = useLocation();
+  const history = useHistory();
+  const location = useLocation();
   let { from } = location.state || { from: { pathname: "/" } };
 
   const checkPassword2 = e => {
@@ -71,16 +75,17 @@ export default function NameForm(props) {
       return res.json()
     }).then(data => {
       console.log(data)
+      // setAuthTokens(data )
       props.setUser(data.user);
       if(data.user.isAdmin){
         props.setData(data.allUsers);
-        history.replace(from);
-        return this.props.history.push('adminDash');
+        // history.replace(from);
+        return history.push('/adminDash');
       }
       type==="login"?
-      history.push('profile')
+      history.push('/profile')
       :
-      history.push('NewUserQuestions');
+      history.push('/NewUserQuestions');
     })
     .catch(errs => {
       for(const err in errs){

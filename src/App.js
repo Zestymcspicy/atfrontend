@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
   Link,
+  useHistory,
   useLocation
 } from "react-router-dom";
 import Header from './Header.js';
@@ -27,9 +28,23 @@ function App() {
   const [data, setData] = useState([]);
   // const [adminArchive, setAdminArchive] = useState(false);
   // const [adminLocation, setAdminLocation] = useState('AdminHome');
+  // const history = useHistory();
+  // if (user == undefined){
+  //   history.push('/')
+  // }
+
+  let existingTokens;
+  localStorage.getItem("tokens")==="undefined"?
+    existingTokens=undefined:
+    JSON.parse(localStorage.getItem("tokens"));
+  const [authTokens, setAuthTokens] = useState(existingTokens);
+
+  const setTokens = (data) => {
+    localStorage.setItem("tokens", JSON.stringify(data));
+    setAuthTokens(data);
+  }
 
   const updateTaskAndUser = task => {
-
     let newTaskList = user.tasks.filter(x => x._id !== task._id);
     newTaskList.push(task)
     let updatedUser = user;
@@ -54,7 +69,7 @@ function App() {
 
 
   return (
-    <AuthContext.Provider>
+    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
     <div className="App">
       <Header
         user={user}
@@ -92,11 +107,12 @@ function App() {
                   user={user}
                   updateTaskAndUser={updateTaskAndUser} />
               </PrivateRoute>
-              <Route path='/archive'>
+              <PrivateRoute user={user} path='/archive'>
                 <Archive
                   user={user}
                   updateTaskAndUser={updateTaskAndUser} />
-              </Route>
+              </PrivateRoute>
+              
 
     </div>
   </AuthContext.Provider>

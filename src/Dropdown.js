@@ -1,23 +1,24 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import { BrowserRouter as Router} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
+import { BrowserRouter as Router,  } from 'react-router-dom';
 
 export default function Dropdown(props) {
 
+  const history = useHistory();
   const signOut = e => {
     props.toggleDropdown(e);
     props.setUser();
     props.setData([]);
-    props.setLocation('start')
+    history.push('/')
   }
 
   const goToArchive = e => {
     props.toggleDropdown(e);
-    if(props.user.isAdmin!==true){
-      props.setLocation('archive')
-    } else if (props.user.isAdmin) {
-      props.setAdminLocation('archive');
-    }
+    // if(props.user.isAdmin!==true){
+    //   history.push('/archive')
+    // } else if (props.user.isAdmin) {
+    //   history.push('/adminDash/archive');
+    // }
   }
 
   const returnToProfile = e => {

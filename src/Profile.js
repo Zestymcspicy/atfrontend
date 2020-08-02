@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import TaskCard from './TaskCard.js';
 import NewTaskModal from './NewTaskModal.js';
+import { useHistory } from 'react-router-dom';
 
 export default function Profile(props){
   // const [newTask, setNewTask] = useState({});
@@ -14,6 +15,10 @@ export default function Profile(props){
 
   const weeklyActive = weekly?"activeTab":"inactiveTab";
   const longTermActive = weekly?"inactiveTab":"activeTab";
+  const history = useHistory()
+  if(props.user==false){
+    history.push('/');
+  }
 
 
   return(
