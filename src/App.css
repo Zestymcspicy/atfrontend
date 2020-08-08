@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+a:visited{
+  text-decoration: none;
+  decoration: none;
+}
+
 .StandardButton{
   min-height: 36px;
   min-width: max-content;
@@ -365,6 +370,7 @@ ol{
 }
 
 .Dropdown {
+  z-index: 1;
   position: absolute;
   top: 52px;
   background-color: inherit;

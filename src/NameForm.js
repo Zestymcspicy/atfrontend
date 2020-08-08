@@ -81,6 +81,8 @@ export default function NameForm(props) {
         props.setData(data.allUsers);
         // history.replace(from);
         return history.push('/adminDash');
+      }else{
+        props.setFocusedUser(data.user);
       }
       type==="login"?
       history.push('/profile')

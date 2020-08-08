@@ -16,19 +16,19 @@ export default function Profile(props){
   const weeklyActive = weekly?"activeTab":"inactiveTab";
   const longTermActive = weekly?"inactiveTab":"activeTab";
   const history = useHistory()
-  if(props.user==false){
+  if(props.focusedUser===false){
     history.push('/');
   }
 
 
   return(
     <div>
-    <h2>{props.user.name}</h2>
+    <h2>{props.focusedUser.name}</h2>
     {modalOpen &&
       <NewTaskModal
       url={props.url}
-      setUser={props.setUser}
-      user={props.user}
+      setUser={props.setFocusedUser}
+      user={props.focusedUser}
       toggleModal={toggleModal}/>
     }
     <button
@@ -46,7 +46,7 @@ export default function Profile(props){
     </div>
     <div className="ListBox">
     <ol>
-    {props.user.tasks.filter(x => x.longTermGoal===!weekly).filter(x => x.completed!==true).map((task, index) => {
+    {props.focusedUser.tasks.filter(x => x.longTermGoal===!weekly).filter(x => x.completed!==true).map((task, index) => {
       return (<li style={{listStyleType:"none"}} key={index}>
         <TaskCard updateTaskAndUser={props.updateTaskAndUser} task={task}/>
         </li>)

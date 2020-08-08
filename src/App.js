@@ -16,6 +16,7 @@ import AdminDash from './AdminDash.js'
 import Archive from './Archive.js';
 import PrivateRoute from './PrivateRoute.js'
 import { AuthContext } from './context/auth.js'
+import { UserProvider } from './context/UserContext.js'
 import './App.css';
 
 
@@ -23,7 +24,8 @@ function App() {
 
   const url  = 'http://localhost:5000/'
   // const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(undefined);
+  const [focusedUser, setFocusedUser] = useState();
   // const [location, setLocation] = useState('start');
   const [data, setData] = useState([]);
   // const [adminArchive, setAdminArchive] = useState(false);
@@ -68,8 +70,10 @@ function App() {
   }
 
 
+
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+      <UserProvider value={{setUser, user, setFocusedUser, focusedUser}}>
     <div className="App">
       <Header
         user={user}
@@ -89,6 +93,7 @@ function App() {
                 url={url}
                 setData={setData}
                 setUser={setUser}
+                setFocusedUser={setFocusedUser}
                 />
               </Route>
 
@@ -97,24 +102,26 @@ function App() {
                   url={url}
                   user={user}
                   setUser={setUser}
+                  setFocusedUser={setFocusedUser}
+                  focusedUser={focusedUser}
                   updateTaskAndUser={updateTaskAndUser} />
               </PrivateRoute>
               <PrivateRoute user={user} path='/adminDash'>
                 <AdminDash
                   url={url}
                   setData={setData}
-                  data={data}
-                  user={user}
-                  updateTaskAndUser={updateTaskAndUser} />
+                  data={data}/>
               </PrivateRoute>
               <PrivateRoute user={user} path='/archive'>
                 <Archive
                   user={user}
+                  focusedUser={focusedUser}
                   updateTaskAndUser={updateTaskAndUser} />
               </PrivateRoute>
-              
+
 
     </div>
+    </UserProvider>
   </AuthContext.Provider>
   );
 }

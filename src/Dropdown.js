@@ -47,18 +47,18 @@ export default function Dropdown(props) {
             props.toggleDropdown(e)
           }}><Link to='/adminDash'>Admin Home</Link></button>
       }
-      {props.location!=="archive"&&props.adminLocation!=="archive"?
+
       <button
         style={styles.dropdownTab}
         onClick={goToArchive}>
         <Link to="/archive">Archive</Link>
     </button>
-      :
+
       <button style={styles.dropdownTab}
         onClick={e=>returnToProfile(e)}>
         <Link to="/profile">Profile</Link>
       </button>
-      }
+      
       <button style={styles.dropdownTab} onClick={e=>signOut(e)}>
         <Link to='/'>Sign Out</Link>
       </button>

@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Profile from './Profile.js';
 import Archive from './Archive.js';
 import { useHistory, Route } from 'react-router-dom';
+import UserContext from './context/UserContext.js'
 
 export default function AdminDash(props) {
 
   const [verify, setVerify] = useState(false);
-  const [focusedUser, setFocusedUser] = useState();
   const [editModalOpen, setEditModalOpen] = useState(false);
   const history = useHistory()
-  if(props.user==undefined){
+  const {user, focusedUser, setFocusedUser} = useContext(UserContext);
+  if(user==undefined){
     history.push('/');
   }
   const OpenDetailScreen = user  => {
     setFocusedUser(user);
-    history.push(`/adminDash/profile/${user.name}`)
+    history.push(`/profile/`)
   }
 
   const ToggleEditModal = () => {
@@ -123,10 +124,11 @@ export default function AdminDash(props) {
     )
   }
 
+
   return(
     <div>
     {editModalOpen && <EditModal user={focusedUser}/>}
-    <h2>{props.user.name}</h2>
+    <h2>{user.name}</h2>
         <ol>{props.data.filter(user => user.isAdmin===false).map((x,index) => {
         return(<li key={index}>
           <div className="AdminUserListEntry">
@@ -153,15 +155,15 @@ export default function AdminDash(props) {
   // switch(props.adminLocation) {
     // case 'AdminHome':
     // return(
-// <Profile setUser={setFocusedUser}
+// <Profile setUser={props.setFocusedUser}
 //   updateTaskAndUser={adminUpdateTaskAndUser}
-//   user={focusedUser}
+//   user={props.focusedUser}
 //   url={props.url}
 //   />
-//   focusedUser?
+//   props.focusedUser?
 //   <Archive
 //     updateTaskAndUser={adminUpdateTaskAndUser}
-//     user={focusedUser}
+//     user={props.focusedUser}
 //     />
 //   :
 //   <span>No user selected</span>
