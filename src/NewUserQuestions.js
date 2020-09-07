@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function NewUserQuestions(props) {
   const [newUserTasks, setNewUserTasks] = useState([]);
   const [longTerm, setlongTerm] = useState(["Go to Peasley Center", "Driver's License or State Issued ID", "Social Security Card", "Birth Certificate"]);
+  const history = useHistory();
   const addNewUserTotalTasks = e => {
     e.preventDefault()
     return fetch(`${props.url}tasks/addmultiple`, {
@@ -18,8 +20,9 @@ export default function NewUserQuestions(props) {
       }
     }).then(res => res.json())
     .then(data => {
+      props.setFocusedUser(data)
       props.setUser(data)
-      props.setLocation('profile')
+      history.push(`/profile/`)
     })
   }
 
@@ -169,7 +172,11 @@ export default function NewUserQuestions(props) {
       onClick={addToLongTerm}
       name="physician"></input>
       </div>
-      <input type="submit" value="Submit"></input>
+      <input
+
+        className="StandardButton"
+        type="submit"
+        value="Submit"></input>
       </form>
     </div>
   )

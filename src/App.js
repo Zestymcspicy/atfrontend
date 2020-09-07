@@ -22,8 +22,8 @@ import './App.css';
 
 function App() {
 
-  const url  = 'http://localhost:5000/'
-  // const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
+  // const url  = 'http://localhost:5000/'
+  const [url, setUrl] = useState('https://activity-tracker-hearthstone.herokuapp.com/')
   const [user, setUser] = useState(undefined);
   const [focusedUser, setFocusedUser] = useState();
   // const [location, setLocation] = useState('start');
@@ -65,7 +65,6 @@ function App() {
     })
     .then(resData => {
       setUser(resData.body)
-
     })
   }
 
@@ -85,6 +84,7 @@ function App() {
               <NewUserQuestions
                 url={url}
                 user={user}
+                setFocusedUser={setFocusedUser}
                 setUser={setUser}
                 />
               </Route>

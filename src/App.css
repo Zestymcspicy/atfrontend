@@ -2,7 +2,8 @@
   text-align: center;
 }
 
-a:visited{
+.dropdown-link{
+  color: #e8e8e8;
   text-decoration: none;
   decoration: none;
 }

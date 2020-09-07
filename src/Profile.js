@@ -16,7 +16,7 @@ export default function Profile(props){
   const weeklyActive = weekly?"activeTab":"inactiveTab";
   const longTermActive = weekly?"inactiveTab":"activeTab";
   const history = useHistory()
-  if(props.focusedUser===false){
+  if(props.focusedUser==false){
     history.push('/');
   }
 

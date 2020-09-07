@@ -45,22 +45,22 @@ export default function Dropdown(props) {
       {props.user.isAdmin &&
         <button style={styles.dropdownTab} onClick={e=>{
             props.toggleDropdown(e)
-          }}><Link to='/adminDash'>Admin Home</Link></button>
+          }}><Link className="dropdown-link" to='/adminDash'>Admin Home</Link></button>
       }
 
       <button
         style={styles.dropdownTab}
         onClick={goToArchive}>
-        <Link to="/archive">Archive</Link>
+        <Link className="dropdown-link" to="/archive">Archive</Link>
     </button>
 
       <button style={styles.dropdownTab}
         onClick={e=>returnToProfile(e)}>
-        <Link to="/profile">Profile</Link>
+        <Link className="dropdown-link" to="/profile">Profile</Link>
       </button>
-      
+
       <button style={styles.dropdownTab} onClick={e=>signOut(e)}>
-        <Link to='/'>Sign Out</Link>
+        <Link className="dropdown-link" to='/'>Sign Out</Link>
       </button>
       </Router>
     </div>
