@@ -64,6 +64,7 @@ function App() {
       return res.json();
     })
     .then(resData => {
+      setFocusedUser(resData.body)
       setUser(resData.body)
     })
   }

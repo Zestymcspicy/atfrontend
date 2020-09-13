@@ -23,11 +23,11 @@ export default function Dropdown(props) {
 
   const returnToProfile = e => {
     props.toggleDropdown(e)
-    if(props.user.isAdmin!==true){
-      props.setLocation('profile')
-    } else if (props.user.isAdmin){
-      props.setAdminLocation('profile');
-    }
+    // if(props.user.isAdmin!==true){
+    //   history.push('/profile')
+    // } else if (props.user.isAdmin){
+    //   history.push('/profile')
+    // }
   }
 
   const styles = {
