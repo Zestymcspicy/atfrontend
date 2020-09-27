@@ -8,7 +8,10 @@ export default function TaskCard(props){
 
   const toggleCompleted = () => setCompleted(!completed);
   const toggleExpanded = () => setExpanded(!expanded);
-
+  let dueDateString = "";
+  if(props.task.dueDate){
+    dueDateString = new Date(props.task.dueDate).toDateString()
+  }
   const updateTask = e => {
     e.preventDefault();
     let repTask = props.task
@@ -32,7 +35,7 @@ export default function TaskCard(props){
     <div className="TaskCard">
     <div className="CardTop">
       <p>{props.task.name}</p>
-      <p>{props.task.dueDate && new Date(props.task.dueDate).toDateString()}</p>
+      <p>{dueDateString}</p>
       <div
       onClick={toggleExpanded}
       className="ArrowBox">

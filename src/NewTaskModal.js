@@ -4,7 +4,7 @@ export default function NewTaskModal(props) {
 
   const [taskName, setTaskName] = useState("");
   const [longTermGoal, setLongTermGoal] = useState(false);
-  const [dueDate, setDueDate] = useState();
+  const [dueDate, setDueDate] = useState("");
   const today = new Date();
 
   useEffect(() => {
